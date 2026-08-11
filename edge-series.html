@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge Series Pyrometer — Tempsens Non-Contact Temperature Sensors (-50°C to 1100°C)</title>
+    <meta name="description" content="Tempsens Edge Series Pyrometers: Edge Lite, Edge Micro, and Edge Core. Compact non-contact IR temperature sensors for automation, OEM machines, and continuous process monitoring up to 1100°C.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & TEMPSENS DESIGN SYSTEM
+           ========================================================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #FFFFFF;
+            --black: #0A0A0A;
+            --orange: #DF991E;
+            --red: #D8271D;
+            --gray-50: #FAFAFA;
+            --gray-100: #F4F5F7;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: var(--white);
+            color: var(--black);
+            font-family: var(--font-body);
+        }
+
+        body {
+            overflow-x: hidden;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           2. NAVIGATION BAR
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--black);
+        }
+
+        .nav-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            font-family: var(--font-display);
+            font-weight: 700;
+            padding-left: 12px;
+            border-left: 2px solid var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 12px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--red);
+        }
+
+        .nav-cta {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--red);
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(216, 39, 29, 0.25);
+        }
+
+        .nav-cta:hover {
+            background: var(--black);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* ==========================================================================
+           3. MAIN CONTAINER
+           ========================================================================== */
+        .pg {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 84px 32px 80px;
+        }
+
+        /* ==========================================================================
+           ZONE 1 — HERO SECTION
+           ========================================================================== */
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding-top: 12px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .breadcrumb {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 8px;
+        }
+
+        .breadcrumb a {
+            color: var(--gray-500);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--red);
+        }
+
+        .breadcrumb span {
+            color: var(--orange);
+            margin: 0 8px;
+        }
+
+        h1.title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            line-height: 1.05;
+            margin-bottom: 10px;
+        }
+
+        .hero-one {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.5;
+            margin-bottom: 24px;
+            max-width: 620px;
+        }
+
+        .ctas {
+            display: flex;
+            gap: 10px;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .btn-p {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 22px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(216, 39, 29, 0.3);
+        }
+
+        .btn-p:hover {
+            background: var(--orange);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(223, 153, 30, 0.5);
+        }
+
+        .btn-s {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 13px 22px;
+            background: var(--white);
+            color: var(--black);
+            border: 1.5px solid var(--gray-300);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .btn-s:hover {
+            border-color: var(--black);
+            background: var(--gray-50);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-700);
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            padding: 6px 14px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Hero Image Showcase Card */
+        .hero-image-box {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--red), var(--orange));
+        }
+
+        .hero-image-box img {
+            max-height: 240px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.12));
+            transition: transform 0.4s ease;
+        }
+
+        .hero-image-box:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-image-tag {
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-top: 16px;
+        }
+
+        /* ==========================================================================
+           ZONE 2 — STAT BAR
+           ========================================================================== */
+        .statbar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 40px 0 48px;
+        }
+
+        .stat {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-3px);
+            border-color: var(--red);
+        }
+
+        .stat-val {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--black);
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .stat-lbl {
+            font-size: 12px;
+            color: var(--gray-500);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           ZONE 3 — MODEL CARDS (PICK YOUR MODEL)
+           ========================================================================== */
+        .section-desc-lead {
+            font-size: 15px;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 16px;
+            margin-bottom: 48px;
+        }
+
+        .mc {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 28px 24px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+        }
+
+        .mc:hover {
+            border-color: var(--red);
+            box-shadow: 0 16px 40px rgba(216, 39, 29, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .mc.best {
+            border-color: var(--orange);
+            box-shadow: 0 12px 35px rgba(223, 153, 30, 0.18);
+        }
+
+        .mc.best::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--orange);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .mc-badge {
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            background: var(--orange);
+            color: var(--white);
+            display: inline-block;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .mc-image-holder {
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .mc-image-holder img {
+            max-height: 120px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .mc:hover .mc-image-holder img {
+            transform: scale(1.08);
+        }
+
+        .mc-name {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .mc-hook {
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .mc-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 14px 0;
+        }
+
+        .mc-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mc-spec {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .mc-spec-label {
+            color: var(--gray-500);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .mc-spec-val {
+            color: var(--black);
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-align: right;
+        }
+
+        /* ==========================================================================
+           ZONE 4 — DIFF TABLE (SIDE-BY-SIDE)
+           ========================================================================== */
+        .diff-intro {
+            margin: 36px 0 16px;
+        }
+
+        .diff-intro h2 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .diff-intro p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 16px;
+            margin-bottom: 48px;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+        }
+
+        table.diff {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: var(--white);
+        }
+
+        table.diff th {
+            text-align: left;
+            padding: 14px 18px;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        table.diff td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--gray-200);
+            color: var(--gray-700);
+            vertical-align: middle;
+        }
+
+        table.diff tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.diff td:first-child {
+            color: var(--black);
+            font-family: var(--font-display);
+            font-weight: 700;
+            width: 38%;
+        }
+
+        .best-cell {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--white);
+            background: var(--orange);
+            padding: 4px 10px;
+            border-radius: 100px;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .check-yes {
+            color: var(--red);
+            font-weight: 800;
+        }
+
+        .check-no {
+            color: var(--gray-400);
+        }
+
+        /* ==========================================================================
+           ZONE 5 — OUTPUT & INTEGRATION MATRIX
+           ========================================================================== */
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+            margin-bottom: 48px;
+        }
+
+        .og-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .og-label {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .og-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .og-item {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--black);
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            padding: 6px 14px;
+        }
+
+        /* ==========================================================================
+           ZONE 6 — APPLICATIONS CHIPS
+           ========================================================================== */
+        .app-section {
+            margin: 36px 0 48px;
+        }
+
+        .app-section h2 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 6px;
+        }
+
+        .app-section p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .app-chips {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            border: 1px solid var(--gray-300);
+            border-radius: 100px;
+            padding: 10px 20px;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-800);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            border-color: var(--red);
+            color: var(--red);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           ZONE 7 — CONVERSION CTA BAR
+           ========================================================================== */
+        .cta-bar {
+            margin: 48px 0;
+            padding: 36px 44px;
+            background: var(--black);
+            color: var(--white);
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .cta-h {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .cta-p {
+            font-size: 14px;
+            color: var(--gray-300);
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .cta-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 200px;
+        }
+
+        /* ==========================================================================
+           ZONE 8 — READ MORE (COLLAPSED ACCORDIONS)
+           ========================================================================== */
+        .rm-zone {
+            border-top: 1px solid var(--gray-200);
+            padding-top: 32px;
+            margin-top: 48px;
+        }
+
+        .rm-intro {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .rm-toggle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 24px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .rm-toggle:hover {
+            border-color: var(--red);
+            background: var(--gray-50);
+        }
+
+        .rm-toggle-label {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+            flex: 1;
+        }
+
+        .rm-toggle-sub {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ch-icon {
+            font-size: 18px;
+            color: var(--red);
+            font-weight: 800;
+            transition: transform 0.3s ease;
+        }
+
+        .rm-toggle.open .ch-icon {
+            transform: rotate(45deg);
+        }
+
+        .rm-body {
+            display: none;
+            padding: 24px 28px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .rm-body.show {
+            display: block;
+        }
+
+        .rm-body h3 {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 8px;
+            margin-top: 16px;
+            text-transform: uppercase;
+        }
+
+        .rm-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .rm-body p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .rm-list {
+            list-style: none;
+            margin: 8px 0 16px;
+        }
+
+        .rm-list li {
+            font-size: 14px;
+            color: var(--gray-700);
+            padding: 4px 0 4px 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .rm-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-weight: 800;
+        }
+
+        /* FAQ inside Read More */
+        .faq-item {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 16px 0;
+            cursor: pointer;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-q .faq-plus {
+            color: var(--red);
+            font-weight: 800;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-q .faq-plus {
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .faq-item.open .faq-a {
+            display: block;
+        }
+
+        /* ==========================================================================
+           9. FOOTER
+           ========================================================================== */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 64px 40px;
+            margin-top: 80px;
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-brand-desc {
+            font-size: 14px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            max-width: 400px;
+        }
+
+        .footer-col h5 {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .pg { padding: 72px 20px 40px; }
+            .hero-layout, .output-grid { grid-template-columns: 1fr; }
+            .model-grid { grid-template-columns: 1fr; }
+            .statbar { grid-template-columns: repeat(2, 1fr); }
+            .cta-bar { grid-template-columns: 1fr; padding: 28px 24px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-logo">Tempsens</span>
+            <span class="nav-tag">Edge Series Pyrometer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">← Main Catalogue</a></li>
+            <li><a href="#models" class="nav-link">Models</a></li>
+            <li><a href="#comparison" class="nav-link">Compare</a></li>
+            <li><a href="#integration" class="nav-link">Integration</a></li>
+            <li><a href="#applications" class="nav-link">Applications</a></li>
+        </ul>
+        <a href="mailto:sales@tempsens.com?subject=Inquiry%20for%20Edge%20Series%20Pyrometer" class="nav-cta">Get a Quote</a>
+    </nav>
+
+
+    <!-- ============ MAIN CONTENT CONTAINER ============ -->
+    <div class="pg">
+
+        <!-- ZONE 1: HERO -->
+        <div class="hero-layout">
+            <div>
+                <div class="breadcrumb">
+                    <a href="index.html">Infrared Pyrometers</a> <span>›</span> Edge Series
+                </div>
+                <h1 class="title">Edge Series Pyrometer</h1>
+                <p class="hero-one">Built for automation, OEM integration, and continuous industrial processes.</p>
+                
+                <div class="ctas">
+                    <a href="#comparison" class="btn-p">Compare models ↓</a>
+                    <a href="https://tempsens.com" target="_blank" download class="btn-s">Download datasheet</a>
+                    <a href="mailto:sales@tempsens.com?subject=Quote%20Request%20-%20Edge%20Series%20Pyrometer" class="btn-s">Request a quote</a>
+                </div>
+            </div>
+
+            <!-- Hero Image Box featuring Edge Series -->
+            <div class="hero-image-box">
+                <img src="Edge series.webp" alt="Edge Series Pyrometer">
+                <div class="hero-image-tag">Tempsens Edge Series Lineup</div>
+            </div>
+        </div>
+
+
+        <!-- ZONE 2: STAT BAR -->
+        <div class="statbar">
+            <div class="stat">
+                <div class="stat-val">3 models</div>
+                <div class="stat-lbl">Lite, Micro, Core</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">22:1</div>
+                <div class="stat-lbl">Max optical resolution</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">20 ms</div>
+                <div class="stat-lbl">Response time</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">180°C</div>
+                <div class="stat-lbl">Ambient, no cooling</div>
+            </div>
+        </div>
+
+
+        <!-- ZONE 3: MODEL CARDS (PICK YOUR MODEL) -->
+        <div id="models"></div>
+
+        <p class="section-desc-lead">Three models. Same signal processing core, different physical form and capability. Choose by ambient temperature, output type, and whether you need RS485.</p>
+
+        <div class="model-grid">
+
+            <!-- Model 1: Edge Lite -->
+            <div class="mc">
+                <div>
+                    <div class="mc-image-holder">
+                        <img src="edge/edge lite.webp" alt="Edge Lite">
+                    </div>
+                    <div class="mc-name">Edge Lite</div>
+                    <div class="mc-hook">Compact. Fully integrated. For standard automation environments.</div>
+                    <div class="mc-divider"></div>
+                    <div class="mc-specs">
+                        <div class="mc-spec"><span class="mc-spec-label">Range</span><span class="mc-spec-val">−40 to 600°C<br><span style="font-weight:400;color:var(--gray-500);font-size:11px">ext. to 1,100°C</span></span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Optics</span><span class="mc-spec-val">15:1</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Response</span><span class="mc-spec-val">20 ms</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Supply</span><span class="mc-spec-val">5–30 VDC</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Outputs</span><span class="mc-spec-val">0–5V / 0–10V</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">IP rating</span><span class="mc-spec-val">IP63</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Max ambient</span><span class="mc-spec-val">80°C</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model 2: Edge Micro -->
+            <div class="mc">
+                <div>
+                    <div class="mc-image-holder">
+                        <img src="edge/edge micro.webp" alt="Edge Micro">
+                    </div>
+                    <div class="mc-name">Edge Micro</div>
+                    <div class="mc-hook">Smallest footprint. For tight spaces and OEM machine integration.</div>
+                    <div class="mc-divider"></div>
+                    <div class="mc-specs">
+                        <div class="mc-spec"><span class="mc-spec-label">Range</span><span class="mc-spec-val">−40 to 600°C<br><span style="font-weight:400;color:var(--gray-500);font-size:11px">ext. to 1,100°C</span></span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Optics</span><span class="mc-spec-val">15:1</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Response</span><span class="mc-spec-val">20 ms</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Supply</span><span class="mc-spec-val">5–30 VDC</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Outputs</span><span class="mc-spec-val">4–20mA, 0–5V, 0–10V + LVTTL</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">IP rating</span><span class="mc-spec-val">IP65</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Max ambient</span><span class="mc-spec-val">120°C</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model 3: Edge Core (Most Capable) -->
+            <div class="mc best">
+                <div>
+                    <div class="mc-badge">Most Capable</div>
+                    <div class="mc-image-holder">
+                        <img src="edge/edge core.webp" alt="Edge Core">
+                    </div>
+                    <div class="mc-name">Edge Core</div>
+                    <div class="mc-hook">High-performance. RS485, dual alarms, highest ambient rating.</div>
+                    <div class="mc-divider"></div>
+                    <div class="mc-specs">
+                        <div class="mc-spec"><span class="mc-spec-label">Range</span><span class="mc-spec-val">−50 to 900°C<br><span style="font-weight:400;color:var(--gray-500);font-size:11px">ext. to 1,000°C</span></span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Optics</span><span class="mc-spec-val">Up to 22:1</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Response</span><span class="mc-spec-val">20 ms</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Supply</span><span class="mc-spec-val">5–36 VDC</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Outputs</span><span class="mc-spec-val">4–20mA, 0–5V, 0–10V + RS485</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Alarms</span><span class="mc-spec-val">Dual relay outputs</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">IP rating</span><span class="mc-spec-val">IP65 (sensor + controller)</span></div>
+                        <div class="mc-spec"><span class="mc-spec-label">Max ambient</span><span class="mc-spec-val">180°C</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ZONE 4: DIFF TABLE -->
+        <div id="comparison"></div>
+
+        <div class="diff-intro">
+            <h2>Which Edge model do you need?</h2>
+            <p>One question decides it: what's your ambient temperature and do you need RS485?</p>
+        </div>
+
+        <div class="table-responsive">
+            <table class="diff">
+                <thead>
+                    <tr>
+                        <th>If you need…</th>
+                        <th>Lite</th>
+                        <th>Micro</th>
+                        <th>Core</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>RS485 digital interface</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="best-cell">✓ Core only</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dual alarm relay outputs</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="best-cell">✓ Core only</span></td>
+                    </tr>
+                    <tr>
+                        <td>4–20 mA current loop</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>TTL / LVTTL digital out</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-no">—</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ambient above 120°C</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓ (to 180°C)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ambient above 80°C</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓ (to 120°C)</span></td>
+                        <td><span class="check-yes">✓ (to 180°C)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Smallest form factor (OEM)</td>
+                        <td><span class="check-no">—</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-no">—</span></td>
+                    </tr>
+                    <tr>
+                        <td>Voltage output only (0–10V)</td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                        <td><span class="check-yes">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- ZONE 5: OUTPUT / INTEGRATION -->
+        <div id="integration"></div>
+
+        <p class="section-desc-lead">All Edge models are automation-ready. Connect directly to your PLC, SCADA, DCS, or OEM control loop without a signal converter.</p>
+
+        <div class="output-grid">
+            <div class="og-card">
+                <div class="og-label">Analog outputs</div>
+                <div class="og-items">
+                    <div class="og-item">0–5 V</div>
+                    <div class="og-item">0–10 V</div>
+                    <div class="og-item">4–20 mA</div>
+                    <div class="og-item">0–20 mA</div>
+                </div>
+            </div>
+            <div class="og-card">
+                <div class="og-label">Digital interfaces</div>
+                <div class="og-items">
+                    <div class="og-item">RS485</div>
+                    <div class="og-item">USB</div>
+                    <div class="og-item">TTL</div>
+                    <div class="og-item">LVTTL (3.3V)</div>
+                </div>
+            </div>
+            <div class="og-card">
+                <div class="og-label">Signal processing (all models)</div>
+                <div class="og-items">
+                    <div class="og-item">Min / Max / Hold</div>
+                    <div class="og-item">Averaging</div>
+                    <div class="og-item">Threshold</div>
+                    <div class="og-item">Hysteresis</div>
+                </div>
+            </div>
+            <div class="og-card">
+                <div class="og-label">Compatible systems</div>
+                <div class="og-items">
+                    <div class="og-item">PLC</div>
+                    <div class="og-item">SCADA</div>
+                    <div class="og-item">DCS</div>
+                    <div class="og-item">OEM machines</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ZONE 6: APPLICATIONS -->
+        <div id="applications"></div>
+
+        <div class="app-section">
+            <h2>Built for lower-temperature continuous processes</h2>
+            <p>The Edge Series sits in the 8–14 µm wideband — ideal for non-metals, coatings, films, and organic materials. Not for steel furnaces or molten metal (see A Series). Right for everything below.</p>
+
+            <div class="app-chips">
+                <div class="chip"><span>📦</span> Plastics, films, polymers</div>
+                <div class="chip"><span>🔘</span> Rubber and tyre manufacturing</div>
+                <div class="chip"><span>✉️</span> Packaging and sealing</div>
+                <div class="chip"><span>🥗</span> Food processing</div>
+                <div class="chip"><span>📄</span> Textiles, paper, web</div>
+                <div class="chip"><span>📟</span> PCB and electronics assembly</div>
+                <div class="chip"><span>🏺</span> Ceramics and composites</div>
+                <div class="chip"><span>🔄</span> Conveyor and moving objects</div>
+                <div class="chip"><span>🎨</span> Painted and coated surfaces</div>
+                <div class="chip"><span>🔬</span> R&D and lab applications</div>
+            </div>
+        </div>
+
+
+        <!-- ZONE 7: CTA BAR -->
+        <div class="cta-bar">
+            <div>
+                <div class="cta-h">Not sure which model fits your process?</div>
+                <p class="cta-p">Tell us the ambient temperature around the sensor, the target temperature, and how you're connecting to your control system. We'll point you to the right model — or tell you if you need something from a different series.</p>
+            </div>
+            <div class="cta-btns">
+                <a href="mailto:sales@tempsens.com?subject=Help%20choosing%20Edge%20Series%20Pyrometer%20Model" class="btn-p">Get a recommendation ↗</a>
+                <a href="https://tempsens.com" target="_blank" download class="btn-s">Download catalogue</a>
+            </div>
+        </div>
+
+
+        <!-- ZONE 8: READ MORE (COLLAPSED ACCORDIONS) -->
+        <div class="rm-zone">
+            <p class="rm-intro">Technical depth for engineers who want to go further — full feature list, installation guidance, emissivity notes, and FAQs. Collapsed by default.</p>
+
+            <!-- 1. Full features -->
+            <div class="rm-toggle" onclick="tog('feat', this)">
+                <span class="rm-toggle-label">Full feature list</span>
+                <span class="rm-toggle-sub">All 17 specs</span>
+                <span class="ch-icon">+</span>
+            </div>
+            <div class="rm-body" id="feat">
+                <h3>Measurement</h3>
+                <ul class="rm-list">
+                    <li>Temperature range −50°C to 1,100°C (model dependent)</li>
+                    <li>Optical resolution up to 22:1 for accurate long-range measurement</li>
+                    <li>Fast response time: 20 ms to 120 ms</li>
+                    <li>8–14 µm spectral range — ideal for non-metals, coatings, films, organics</li>
+                    <li>Adjustable emissivity and transmittance settings</li>
+                </ul>
+                <h3>Signal and integration</h3>
+                <ul class="rm-list">
+                    <li>Parallel analog and digital output operation</li>
+                    <li>Analog: 0–5 V, 0–10 V, 0/4–20 mA</li>
+                    <li>Digital: TTL, LVTTL (3.3V), USB, RS485 (Core only)</li>
+                    <li>Dual alarm relay outputs (Core only)</li>
+                    <li>Intelligent signal processing: averaging, Min/Max, Hold, threshold, hysteresis</li>
+                </ul>
+                <h3>Construction and mounting</h3>
+                <ul class="rm-list">
+                    <li>Rugged stainless steel housing, IP63 (Lite) / IP65 (Micro, Core)</li>
+                    <li>Ambient operation to 80°C (Lite), 120°C (Micro), 180°C (Core) — no cooling required</li>
+                    <li>Compact M12 threaded mount for standard industrial installation</li>
+                    <li>Close-focus lenses and mounting accessories available</li>
+                    <li>Suitable for continuous duty in harsh environments</li>
+                </ul>
+            </div>
+
+            <!-- 2. Installation -->
+            <div class="rm-toggle" onclick="tog('install', this)">
+                <span class="rm-toggle-label">Installation and accessories</span>
+                <span class="rm-toggle-sub">Mounting, air purge, protection</span>
+                <span class="ch-icon">+</span>
+            </div>
+            <div class="rm-body" id="install">
+                <h3>What's available</h3>
+                <ul class="rm-list">
+                    <li>Air purge collar — required in dusty, steam, or particulate-heavy environments</li>
+                    <li>Mounting brackets — adjustable, lockable once aligned</li>
+                    <li>Close-focus lenses — for short target distances or small spot sizes</li>
+                    <li>Reflection protection tubes — for environments with high background radiation</li>
+                    <li>USB converter — for configuration via PC</li>
+                    <li>M12 connector cables and wiring accessories</li>
+                </ul>
+                <h3>Installation notes</h3>
+                <p>The M12 threaded mount is standard — fits most industrial bracket systems. For OEM integration, the Micro's compact form allows direct embedding into machine heads. Specify accessories at order time; field retrofitting on a mounted sensor adds site cost.</p>
+                <p>If ambient temperature around the sensor body exceeds 80°C, specify the Micro (to 120°C) or Core (to 180°C). Lite will drift above its ambient limit without a cooling jacket.</p>
+            </div>
+
+            <!-- 3. Emissivity note -->
+            <div class="rm-toggle" onclick="tog('emit', this)">
+                <span class="rm-toggle-label">Emissivity — why it matters for Edge Series</span>
+                <span class="rm-toggle-sub">Setting it correctly</span>
+                <span class="ch-icon">+</span>
+            </div>
+            <div class="rm-body" id="emit">
+                <p>The Edge Series uses the 8–14 µm wideband. In this range, most non-metals (plastics, rubber, food, textiles, coatings) have emissivity above 0.90 — making accurate measurement straightforward. For these materials, the factory default emissivity setting is usually adequate.</p>
+                <p>For metals with an oxide layer (mild steel at low temperatures, ceramics) emissivity varies with surface condition. Measure emissivity once under known conditions and lock in the setting, or use the averaging function to smooth variation. For polished metals — don't use the Edge Series; the 8–14 µm band is poorly suited to low-emissivity surfaces. Use a short-wave pyrometer (A Series or E Series) instead.</p>
+                <p>Adjustable emissivity is standard on all three Edge models via the digital interface or setup key.</p>
+            </div>
+
+            <!-- 4. FAQ -->
+            <div class="rm-toggle" onclick="tog('faq', this)">
+                <span class="rm-toggle-label">Frequently asked questions</span>
+                <span class="rm-toggle-sub">4 questions engineers ask before ordering</span>
+                <span class="ch-icon">+</span>
+            </div>
+            <div class="rm-body" id="faq">
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-q">What's the temperature range for each model? <span class="faq-plus">+</span></div>
+                    <div class="faq-a">Lite and Micro: −40°C to 600°C standard, extendable to 1,100°C. Core: −50°C to 900°C standard, extendable to 1,000°C. The extension range is a firmware unlock — confirm availability at the time of order.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-q">Can Edge Series connect to PLC, SCADA, or DCS directly? <span class="faq-plus">+</span></div>
+                    <div class="faq-a">Yes. All models support analog output (4–20 mA or 0–10 V) which connects directly to any standard AI card. The Core adds RS485 for Modbus integration. USB is available on all models for PC configuration — it is not a process output.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-q">Which industries is Edge Series right for? <span class="faq-plus">+</span></div>
+                    <div class="faq-a">Plastics, rubber, packaging, food, textiles, paper, electronics, ceramics, composites, OEM machine builders, and industrial automation. The 8–14 µm range suits non-metallic surfaces well. For steel or molten metal applications above 800°C, the A Series or E Series is more appropriate.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-q">What accessories are needed for installation? <span class="faq-plus">+</span></div>
+                    <div class="faq-a">At minimum: a mounting bracket and M12 cable. For dusty or steam-heavy environments, add an air purge collar. For short target distances, specify a close-focus lens. For high-radiation-background environments, a reflection protection tube. We recommend specifying the full accessory kit at the time of order.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand-title">Tempsens</div>
+                <p class="footer-brand-desc">India's leading temperature sensing & non-contact Pyrometry manufacturer. Delivering industrial precision across steel, aluminium, glass, cement, and power processes worldwide since 1976.</p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Pyrometers</h5>
+                <ul>
+                    <li><a href="edge-series.html">Edge Series</a></li>
+                    <li><a href="index.html#catalogue">A-Series Online</a></li>
+                    <li><a href="index.html#catalogue">Aluminium Pyrometer</a></li>
+                    <li><a href="index.html#catalogue">Fiber Optic Series</a></li>
+                    <li><a href="index.html#catalogue">Glass Pyrowell G2</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Applications</h5>
+                <ul>
+                    <li><a href="index.html#industries">Aluminium Extrusion</a></li>
+                    <li><a href="index.html#industries">Steel & Melt Shop</a></li>
+                    <li><a href="index.html#industries">Glass Forehearth</a></li>
+                    <li><a href="index.html#industries">Cement Kiln Shell</a></li>
+                    <li><a href="index.html#industries">Thermal Power</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="https://tempsens.com/about">About Tempsens</a></li>
+                    <li><a href="https://tempsens.com/contact">Contact Support</a></li>
+                    <li><a href="https://tempsens.com">Certifications</a></li>
+                    <li><a href="https://tempsens.com">Calibration Labs</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Tempsens Instruments Pvt. Ltd. All rights reserved.</span>
+            <span>ISO 9001:2015 | NABL Accredited Calibration (-20°C to 3000°C)</span>
+        </div>
+    </footer>
+
+    <!-- ============ JAVASCRIPT FOR ACCORDIONS ============ -->
+    <script>
+        function tog(id, btn) {
+            const body = document.getElementById(id);
+            const open = body.classList.contains('show');
+            body.classList.toggle('show', !open);
+            btn.classList.toggle('open', !open);
+        }
+
+        function toggleFAQ(item) {
+            item.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
