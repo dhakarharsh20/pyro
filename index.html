@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tempsens Pyrometers — Non-Contact Temperature Sensing Systems (-20°C to 3000°C)</title>
+    <meta name="description" content="Precision pyrometers by Tempsens. Non-contact infrared temperature measurement from -20°C to 3000°C for steel, aluminium, glass, cement, and power industries.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* ==========================================================================
+           1. RESET & DESIGN SYSTEM (WHITE THEME WITH RED & ORANGE ACCENTS)
+           ========================================================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #FFFFFF;
+            --black: #0A0A0A;
+            --orange: #DF991E;
+            --red: #D8271D;
+            --gray-50: #FAFAFA;
+            --gray-100: #F4F5F7;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: var(--white);
+            color: var(--black);
+            font-family: var(--font-body);
+        }
+
+        body {
+            overflow-x: hidden;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           2. NAVIGATION
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--black);
+        }
+
+        .nav-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            font-family: var(--font-display);
+            font-weight: 700;
+            padding-left: 12px;
+            border-left: 2px solid var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 12px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--red);
+        }
+
+        .nav-cta {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--red);
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(216, 39, 29, 0.25);
+        }
+
+        .nav-cta:hover {
+            background: var(--black);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* ==========================================================================
+           3. MASTER PINNED 6-SCROLL CONTINUOUS CANVAS
+           ========================================================================== */
+        .pin-master {
+            height: 500vh;
+            position: relative;
+            background: var(--white);
+        }
+
+        .stage-container {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+        }
+
+        /* Ambient White Grid Background — REMOVED, plain white */
+        .ambient-grid {
+            display: none;
+        }
+
+        /* Hero Bottom Action Buttons */
+        .hero-bottom-actions {
+            position: absolute;
+            bottom: 36px;
+            left: 48px;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            pointer-events: auto;
+        }
+
+        .hero-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: var(--white);
+            color: var(--black);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            border: 1.5px solid var(--orange);
+            box-shadow: 0 10px 30px rgba(223, 153, 30, 0.45);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+
+        .hero-download-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(223, 153, 30, 0.65);
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .hero-download-btn .dl-icon {
+            font-size: 14px;
+        }
+
+        .hero-engineer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            border: 1.5px solid var(--red);
+            box-shadow: 0 10px 30px rgba(216, 39, 29, 0.35);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+
+        .hero-engineer-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(216, 39, 29, 0.55);
+            background: var(--black);
+            border-color: var(--black);
+        }
+
+        /* Hero Architectural Typography */
+        .hero-title-wrap {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            z-index: 5;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(65px, 15vw, 250px);
+            font-weight: 875;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            color: var(--black);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .hero-subtitle {
+            margin-top: 28px;
+            font-size: clamp(11px, 1.1vw, 14px);
+            font-weight: 700;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .hero-stats-line {
+            margin-top: 20px;
+            font-family: var(--font-display);
+            font-size: clamp(11px, 1vw, 14px);
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .hero-stats-line .stat-highlight {
+            color: var(--orange);
+            font-weight: 800;
+        }
+
+        /* Hero Infinite Product Loop (No names, depth floating effect) */
+        .hero-product-marquee {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 340px;
+            transform: translateY(-50%);
+            z-index: 3;
+            pointer-events: none;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            will-change: transform, opacity;
+        }
+
+        .hero-product-track {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            height: 100%;
+            width: max-content;
+            animation: heroMarqueeScroll 28s linear infinite;
+        }
+
+        .hero-product-item {
+            flex-shrink: 0;
+            width: 220px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-product-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.12));
+            opacity: 0.85;
+            transition: transform 0.6s ease;
+        }
+
+        @keyframes heroMarqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Scroll Progress Hint */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .scroll-indicator span {
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .scroll-indicator-line {
+            width: 2px;
+            height: 36px;
+            background: linear-gradient(to bottom, var(--red), var(--orange), transparent);
+            animation: pulseLine 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseLine {
+            0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* ==========================================================================
+           4. CHAPTER OVERLAYS
+           ========================================================================== */
+
+        /* --- SCROLL 1: WHY TEMPSENS BRAND PROOF STRIP (REMOVED) --- */
+        .chapter-strip-wrap {
+            display: none !important;
+        }
+
+
+        /* --- SCROLL 2 & 3: QUICK SELECTOR — VERTICAL TILES WITH EXPAND BELOW --- */
+        .chapter-measure-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            padding: 50px 64px 20px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            will-change: opacity, transform;
+        }
+
+        .section-eyebrow {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 3.5vw, 44px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 24px;
+            line-height: 1.05;
+        }
+
+        /* Horizontal Tile Grid (3 columns × 2 rows) */
+        .selector-tiles-wrap {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .selector-tile {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            padding: 18px 22px;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 200;
+            border-radius: 10px;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .selector-tile:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-300);
+        }
+
+        .selector-tile.active {
+            background: var(--white);
+            border-color: var(--orange);
+            box-shadow: 0 4px 16px rgba(223, 153, 30, 0.15);
+            z-index: 102;
+        }
+
+        .tile-title {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+            pointer-events: none;
+        }
+
+        .selector-tile.active .tile-title {
+            color: var(--black);
+        }
+
+        .tile-subtitle {
+            font-size: 12px;
+            color: var(--gray-400);
+            font-weight: 400;
+            line-height: 1.5;
+            pointer-events: none;
+        }
+
+        /* Detail Box below tiles grid */
+        .selector-detail-box {
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 16px;
+            padding: 24px 28px;
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            pointer-events: auto;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .detail-top-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .detail-series-tag {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gray-600);
+        }
+
+        .detail-series-tag span {
+            color: var(--black);
+            font-weight: 800;
+        }
+
+        .detail-description {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            max-width: 900px;
+            margin-bottom: 14px;
+        }
+
+        .detail-bottom-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .detail-email-link {
+            font-size: 14px;
+            color: var(--red);
+            font-weight: 600;
+            text-decoration: none;
+            pointer-events: auto;
+            transition: color 0.2s ease;
+        }
+
+        .detail-email-link:hover {
+            color: var(--orange);
+        }
+
+        /* Recommendation Card Flow (NO IMAGES - ONLY TEXT MODEL RING PILL) */
+        .recommendation-card {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rec-flow-step {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .rec-step-num {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--orange);
+            background: rgba(223, 153, 30, 0.12);
+            padding: 4px 10px;
+            border-radius: 100px;
+            flex-shrink: 0;
+        }
+
+        .rec-step-label {
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 2px;
+        }
+
+        .rec-target-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--black);
+        }
+
+        .rec-challenge-text {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .rec-step-recommend {
+            padding-top: 18px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .rec-step-label-gold {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 14px;
+        }
+
+        /* TEXT ONLY Ring / Pill Button for Recommended Product */
+        .rec-model-ring-btn-text {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 28px;
+            background: var(--white);
+            border: 2px solid var(--red);
+            border-radius: 100px;
+            text-decoration: none;
+            color: var(--black);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(216, 39, 29, 0.15);
+            pointer-events: auto;
+        }
+
+        .rec-model-ring-btn-text:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(216, 39, 29, 0.28);
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .rec-ring-text-name {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .rec-ring-text-sub {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .rec-ring-arrow-icon {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        /* --- SCROLL 4: INDUSTRY SELECTOR SCENE TRANSFORMATION --- */
+        .chapter-industry-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            padding: 80px 64px 40px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            will-change: opacity, transform;
+        }
+
+        .industry-ring-strip-wrap {
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .industry-strip-track {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 100;
+        }
+
+        .ind-pill-btn {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-700);
+            cursor: pointer !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 100;
+        }
+
+        .ind-pill-btn:hover {
+            border-color: var(--gray-400);
+            color: var(--black);
+        }
+
+        .ind-pill-btn.active {
+            border-color: var(--orange);
+            color: var(--black);
+            background: var(--white);
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(223, 153, 30, 0.15);
+        }
+
+        .industry-card-new {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 14px;
+            padding: 32px 36px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            max-width: 1000px;
+            width: 100%;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+
+        .ind-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px 40px;
+        }
+
+        .ind-card-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .ind-sec-title {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .ind-sec-text {
+            font-size: 13.5px;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        .ind-rec-text {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--red);
+        }
+
+        .ind-model-preview-full {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ind-model-preview-full img {
+            max-height: 130px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.12));
+            transition: transform 0.4s ease;
+        }
+
+        .ind-model-preview-full:hover img {
+            transform: scale(1.05);
+        }
+
+        .ind-model-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--black);
+        }
+
+        .ind-model-sub {
+            font-size: 11px;
+            color: var(--orange);
+            margin-top: 2px;
+            font-weight: 700;
+        }
+
+        .ind-model-range {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--red);
+            margin-top: 6px;
+        }
+
+        .btn-email-quote {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 16px;
+            padding: 14px 20px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(216, 39, 29, 0.3);
+            pointer-events: auto;
+        }
+
+        .btn-email-quote:hover {
+            background: var(--orange);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(223, 153, 30, 0.5);
+        }
+
+
+        /* --- SCROLL 5: PRIMARY CTA (NEED SOMETHING DIFFERENT?) --- */
+        .chapter-cta-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 64px;
+            background: var(--black);
+            color: var(--white);
+            opacity: 0;
+            pointer-events: none;
+            will-change: opacity, transform;
+        }
+
+        .cta-eyebrow-tag {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+
+        .cta-giant-heading {
+            font-family: var(--font-display);
+            font-size: clamp(34px, 5.5vw, 80px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            color: var(--white);
+            max-width: 920px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .cta-sub-statement {
+            font-size: clamp(14px, 1.4vw, 18px);
+            color: var(--gray-300);
+            font-weight: 300;
+            max-width: 660px;
+            margin-bottom: 44px;
+            line-height: 1.6;
+        }
+
+        .cta-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary-glow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 44px;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            pointer-events: auto;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 35px rgba(216, 39, 29, 0.4);
+        }
+
+        .btn-primary-glow:hover {
+            background: var(--orange);
+            transform: scale(1.04);
+            box-shadow: 0 0 50px rgba(223, 153, 30, 0.6);
+        }
+
+        .btn-secondary-line {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            pointer-events: auto;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary-line:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ==========================================================================
+           5. SCROLL 6 — PRODUCT CATALOGUE LIBRARY
+           ========================================================================== */
+        .catalogue-section {
+            background: var(--gray-50);
+            padding: 120px 64px;
+            position: relative;
+            z-index: 30;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cat-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .cat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 56px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cat-eyebrow {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .cat-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--black);
+        }
+
+        .cat-subtitle {
+            font-size: 15px;
+            color: var(--gray-600);
+            font-weight: 400;
+            margin-top: 8px;
+            max-width: 540px;
+        }
+
+        /* Filter Tabs */
+        .cat-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .cat-filter-btn {
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            color: var(--gray-700);
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cat-filter-btn:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .cat-filter-btn.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        /* Grid */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 24px;
+        }
+
+        .cat-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--red), var(--orange));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            border-color: var(--gray-300);
+        }
+
+        .cat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cat-card-img {
+            height: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .cat-card-img img {
+            max-height: 150px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.08));
+        }
+
+        .cat-card:hover .cat-card-img img {
+            transform: scale(1.06);
+        }
+
+        .cat-card-tag {
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 6px;
+        }
+
+        .cat-card-name {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .cat-card-range {
+            font-family: var(--font-display);
+            font-size: 13px;
+            color: var(--red);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cat-card-desc {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cat-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cat-card-spec-tag {
+            font-size: 11px;
+            color: var(--gray-500);
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+
+        .cat-card-arrow {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--red);
+        }
+
+        /* ==========================================================================
+           6. SCROLL 7 — TECHNICAL DEPTH & SEO CONTENT
+           ========================================================================== */
+        .technical-section {
+            background: var(--white);
+            padding: 120px 64px;
+            position: relative;
+            z-index: 30;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .tech-container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .tech-header {
+            margin-bottom: 56px;
+        }
+
+        .tech-eyebrow {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .tech-title {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .tech-desc {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* Technical Accordions */
+        .accordion-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .accordion-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+            color: var(--black);
+            transition: color 0.3s ease;
+        }
+
+        .accordion-btn:hover {
+            color: var(--red);
+        }
+
+        .accordion-title {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .accordion-num {
+            color: var(--orange);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .accordion-icon {
+            font-size: 20px;
+            color: var(--gray-400);
+            transition: transform 0.3s ease;
+            font-weight: 700;
+        }
+
+        .accordion-item.open .accordion-icon {
+            transform: rotate(45deg);
+            color: var(--red);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .accordion-body {
+            padding: 0 0 28px;
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        /* FAQ Question Buttons with Red Outline & Glow */
+        .faq-item-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .faq-q-item {
+            border: 1.5px solid var(--red);
+            border-radius: 12px;
+            background: var(--white);
+            box-shadow: 0 4px 18px rgba(216, 39, 29, 0.12);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-q-item:hover {
+            box-shadow: 0 8px 25px rgba(216, 39, 29, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .faq-q-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+            transition: color 0.3s ease;
+        }
+
+        .faq-q-btn:hover {
+            color: var(--red);
+        }
+
+        .faq-q-icon {
+            font-size: 18px;
+            color: var(--red);
+            font-weight: 800;
+            transition: transform 0.3s ease;
+            margin-left: 16px;
+            flex-shrink: 0;
+        }
+
+        .faq-q-item.open .faq-q-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-ans-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-ans-body {
+            padding: 16px 24px 20px;
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            border-top: 1px solid rgba(216, 39, 29, 0.15);
+            background: var(--gray-50);
+        }
+
+        /* ==========================================================================
+           7. FOOTER
+           ========================================================================== */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 64px 40px;
+            position: relative;
+            z-index: 30;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-brand-desc {
+            font-size: 14px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            max-width: 400px;
+        }
+
+        .footer-col h5 {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        /* ==========================================================================
+           8. RESPONSIVE BREAKPOINTS
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .chapter-measure-wrap, .chapter-industry-wrap { padding: 64px 24px 32px; }
+            .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+            .ind-card-grid { grid-template-columns: 1fr; gap: 20px; }
+            .catalogue-section, .technical-section, .footer { padding: 80px 24px 32px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .hero-bottom-actions { bottom: 20px; left: 24px; flex-wrap: wrap; }
+            .hero-download-btn { padding: 10px 20px; font-size: 10px; }
+            .hero-engineer-btn { padding: 10px 20px; font-size: 10px; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner { grid-template-columns: 1fr; }
+            .cta-actions { flex-direction: column; width: 100%; }
+            .btn-primary-glow, .btn-secondary-line { width: 100%; justify-content: center; }
+            .rec-model-ring-btn-text { flex-direction: column; text-align: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav">
+        <a href="#" class="nav-brand">
+            <span class="nav-logo">Tempsens</span>
+            <span class="nav-tag">Pyrometer Engineering</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#selector" class="nav-link">Selector</a></li>
+            <li><a href="#industries" class="nav-link">Industries</a></li>
+            <li><a href="#catalogue" class="nav-link">Catalogue</a></li>
+            <li><a href="#technical" class="nav-link">Technical</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <a href="https://tempsens.com" class="hero-download-btn" style="position: static; bottom: auto; left: auto; box-shadow: 0 4px 14px rgba(223, 153, 30, 0.25); padding: 10px 20px;" target="_blank" download>
+                <span class="dl-icon">⬇</span>
+                <span>CATALOGUE</span>
+            </a>
+            <a href="mailto:sales@tempsens.com?subject=Pyrometer%20Inquiry%20-%20Talk%20to%20an%20Engineer" class="nav-cta">Talk to an Engineer</a>
+        </div>
+    </nav>
+
+
+    <!-- ============ MASTER PINNED 6-SCROLL CONTINUOUS CANVAS ============ -->
+    <div class="pin-master" id="pin-master">
+        <div class="stage-container" id="stage-container">
+            
+            <!-- White Grid Background -->
+            <div class="ambient-grid"></div>
+
+            <!-- Hero Bottom Action Buttons -->
+            <div class="hero-bottom-actions" id="hero-bottom-actions">
+                <a href="https://tempsens.com" class="hero-download-btn" target="_blank" download>
+                    <span class="dl-icon">⬇</span>
+                    <span>DOWNLOAD CATALOGUE</span>
+                </a>
+                <a href="mailto:sales@tempsens.com?subject=Pyrometer%20Inquiry%20-%20Talk%20to%20an%20Engineer" class="hero-engineer-btn">
+                    <span>TALK TO AN ENGINEER</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- Scroll Progress Indicator -->
+            <div class="scroll-indicator" id="scroll-hint">
+                <span>Scroll to Explore</span>
+                <div class="scroll-indicator-line"></div>
+            </div>
+
+            <!-- INITIAL HERO — ARCHITECTURAL MINIMAL TYPOGRAPHY -->
+            <div class="hero-title-wrap" id="hero-title-wrap">
+                <h1 class="hero-title">PYROMETER</h1>
+                <p class="hero-subtitle">NON-CONTACT TEMPERATURE MEASUREMENT</p>
+            </div>
+
+            <!-- INFINITE HERO PRODUCT LOOP (Behind text, using exact filenames in d:\pyro) -->
+            <div class="hero-product-marquee" id="hero-product-marquee">
+                <div class="hero-product-track">
+                    <div class="hero-product-item"><img src="Edge series.webp" alt="EDGE C8"></div>
+                    <div class="hero-product-item"><img src="A-Series-3.webp" alt="A-Series"></div>
+                    <div class="hero-product-item"><img src="Fiber optic series.png" alt="Fiber Optic"></div>
+                    <div class="hero-product-item"><img src="Glass pyrometer.png" alt="Glass Pyrometer"></div>
+                    <div class="hero-product-item"><img src="Aluminium pyrometer.png" alt="Aluminium Pyrometer"></div>
+                    <div class="hero-product-item"><img src="T series.png" alt="T-Series"></div>
+                    <div class="hero-product-item"><img src="Portable-Series.webp" alt="Portable"></div>
+                    <div class="hero-product-item"><img src="E-Series-1.webp" alt="E-Series"></div>
+
+                    <!-- Duplicate for seamless loop -->
+                    <div class="hero-product-item"><img src="Edge series.webp" alt="EDGE C8"></div>
+                    <div class="hero-product-item"><img src="A-Series-3.webp" alt="A-Series"></div>
+                    <div class="hero-product-item"><img src="Fiber optic series.png" alt="Fiber Optic"></div>
+                    <div class="hero-product-item"><img src="Glass pyrometer.png" alt="Glass Pyrometer"></div>
+                    <div class="hero-product-item"><img src="Aluminium pyrometer.png" alt="Aluminium Pyrometer"></div>
+                    <div class="hero-product-item"><img src="T series.png" alt="T-Series"></div>
+                    <div class="hero-product-item"><img src="Portable-Series.webp" alt="Portable"></div>
+                    <div class="hero-product-item"><img src="E-Series-1.webp" alt="E-Series"></div>
+                </div>
+            </div>
+
+
+            <!-- SCROLL 1 OVERLAY — WHY TEMPSENS (REMOVED) -->
+            <div class="chapter-strip-wrap" id="chapter-1-strip"></div>
+
+
+            <!-- SCROLL 2 OVERLAY — QUICK SELECTOR HORIZONTAL TILES -->
+            <div class="chapter-measure-wrap" id="chapter-2-measure">
+                <div class="section-eyebrow">QUICK SELECTOR</div>
+                <h2 class="section-heading">What's your primary challenge?</h2>
+                
+                <div class="selector-tiles-wrap">
+
+                    <!-- 3×2 Tile Grid -->
+                    <div class="tiles-grid">
+                        <button type="button" class="selector-tile active" data-key="moving" onclick="selectTile('moving', this)">
+                            <div class="tile-title">Moving targets</div>
+                            <div class="tile-subtitle">Billets, strip, conveyor, rotating kiln</div>
+                        </button>
+                        <button type="button" class="selector-tile" data-key="extreme" onclick="selectTile('extreme', this)">
+                            <div class="tile-title">Extreme temperature</div>
+                            <div class="tile-subtitle">Above 1,300°C — furnace, molten metal, ladle</div>
+                        </button>
+                        <button type="button" class="selector-tile" data-key="nocontact" onclick="selectTile('nocontact', this)">
+                            <div class="tile-title">Can't make contact</div>
+                            <div class="tile-subtitle">Fragile surfaces, pressurised vessels, contamination risk</div>
+                        </button>
+                        <button type="button" class="selector-tile" data-key="glass" onclick="selectTile('glass', this)">
+                            <div class="tile-title">Glass or aluminium</div>
+                            <div class="tile-subtitle">Materials that need their own wavelength</div>
+                        </button>
+                        <button type="button" class="selector-tile" data-key="oem" onclick="selectTile('oem', this)">
+                            <div class="tile-title">OEM integration</div>
+                            <div class="tile-subtitle">Embedding into your machine or system</div>
+                        </button>
+                        <button type="button" class="selector-tile" data-key="spot" onclick="selectTile('spot', this)">
+                            <div class="tile-title">Spot checks and commissioning</div>
+                            <div class="tile-subtitle">Handheld, on-demand, field work</div>
+                        </button>
+                    </div>
+
+                    <!-- Shared Detail Box (appears below grid) -->
+                    <div class="selector-detail-box" id="selector-detail-box">
+                        <div class="detail-header-label" id="detail-header-label">Recommendation for Moving targets:</div>
+                        <p class="detail-description" id="detail-description">For moving targets, the A Series or E Series in fixed-mount configuration. Response from 2 ms. The sensor reads before the target passes. Portable P Series for spot checks on moving stock.</p>
+                        <div class="detail-bottom-row">
+                            <a href="mailto:sales@tempsens.com?subject=Help%20me%20select%20a%20pyrometer" class="detail-email-link">Not sure? Describe your application and we'll recommend one ↗</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- SCROLL 4 OVERLAY — INDUSTRY SELECTOR VISUAL STORYTELLING & TRANSFORMATION -->
+            <div class="chapter-industry-wrap" id="chapter-3-industry">
+                <div class="section-eyebrow">INDUSTRY APPLICATIONS</div>
+                <h2 class="section-heading">What are you measuring, and where?</h2>
+                
+                <div class="industry-ring-strip-wrap">
+                    <div class="industry-strip-track">
+                        <button class="ind-pill-btn active" onclick="selectRingIndustry('steel', this)">Steel</button>
+                        <button class="ind-pill-btn" onclick="selectRingIndustry('glass', this)">Glass</button>
+                        <button class="ind-pill-btn" onclick="selectRingIndustry('cement', this)">Cement</button>
+                        <button class="ind-pill-btn" onclick="selectRingIndustry('pharma', this)">Pharma</button>
+                        <button class="ind-pill-btn" onclick="selectRingIndustry('semiconductor', this)">Semiconductor</button>
+                        <button class="ind-pill-btn" onclick="selectRingIndustry('petrochemical', this)">Petrochemical</button>
+                        <button class="ind-pill-btn" onclick="selectRingIndustry('power', this)">Power</button>
+                    </div>
+                </div>
+
+                <div class="industry-card-new" id="ind-detail-card">
+                    <div class="ind-card-grid">
+                        <div class="ind-card-section">
+                            <h5 class="ind-sec-title">WHAT YOU'RE MEASURING</h5>
+                            <p class="ind-sec-text" id="ind-measuring">Billet surface at the rolling mill exit. Ladle shell temperature. Reheating furnace interior. Continuous caster tundish. TMT quench zone exit temperature.</p>
+                        </div>
+                        <div class="ind-card-section">
+                            <h5 class="ind-sec-title">WHY CONTACT FAILS HERE</h5>
+                            <p class="ind-sec-text" id="ind-why-fails">You can't place a contact sensor on steel moving at line speed. Ladle shells exceed sensor survival temperature. Furnace interiors need readings without disturbing the atmosphere.</p>
+                        </div>
+                        <div class="ind-card-section">
+                            <h5 class="ind-sec-title">THE KEY CHALLENGE</h5>
+                            <p class="ind-sec-text" id="ind-challenge">Scale and steam between the pyrometer and the billet distort the reading. Emissivity varies as the surface oxidises through the rolling process. Ladle shells need to be scanned continuously — one cold spot means refractory failure and a furnace shutdown.</p>
+                        </div>
+                        <div class="ind-card-section">
+                            <h5 class="ind-sec-title">RECOMMENDED SERIES</h5>
+                            <p class="ind-sec-text ind-rec-text" id="ind-recommended">A Series or E Series for fixed mount. Portable P Series for spot-checking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SCROLL 5 OVERLAY — PRIMARY CTA (NEED SOMETHING DIFFERENT?) -->
+            <div class="chapter-cta-wrap" id="chapter-4-cta">
+                <div class="cta-eyebrow-tag">SCROLL 04 — APPLICATION CONSULTATION</div>
+                <h2 class="cta-giant-heading">NEED SOMETHING DIFFERENT? WE CAN ENGINEER IT.</h2>
+                <p class="cta-sub-statement">Every industrial process is unique. Tell us your target material, temperature requirements (-20°C to 3000°C), and environment — our application engineers will design a custom solution.</p>
+                
+                <div class="cta-actions" id="quote">
+                    <a href="https://tempsens.com/contact" class="btn-primary-glow">
+                        GET A CUSTOM QUOTE →
+                    </a>
+                    <a href="https://tempsens.com/contact" class="btn-secondary-line">
+                        TALK TO A TEMPSENS ENGINEER →
+                    </a>
+                    <a href="https://tempsens.com" class="btn-secondary-line" target="_blank" download style="border-color: var(--orange); color: var(--orange); box-shadow: 0 0 25px rgba(223, 153, 30, 0.35);">
+                        ⬇ DOWNLOAD CATALOGUE
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ============ SCROLL 6 — PRODUCT CATALOGUE LIBRARY ============ -->
+    <section class="catalogue-section" id="catalogue">
+        <div class="cat-container">
+            <div class="cat-header">
+                <div>
+                    <div class="cat-eyebrow">SCROLL 05 — PRODUCT LIBRARY</div>
+                    <h2 class="cat-title">EXPLORE THE PYROMETER RANGE</h2>
+                    <p class="cat-subtitle">Complete portfolio of Tempsens non-contact temperature sensors covering -20°C to 3000°C.</p>
+                </div>
+                
+                <div class="cat-filters">
+                    <button class="cat-filter-btn active" onclick="filterCatalogue('all', this)">All Products</button>
+                    <button class="cat-filter-btn" onclick="filterCatalogue('fixed', this)">Fixed Online</button>
+                    <button class="cat-filter-btn" onclick="filterCatalogue('specialty', this)">Special Pyrometers</button>
+                    <button class="cat-filter-btn" onclick="filterCatalogue('portable', this)">Portable</button>
+                </div>
+            </div>
+
+            <div class="cat-grid">
+
+                <!-- 1. Edge Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="fixed">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="Edge series.webp" alt="Edge Series">
+                        </div>
+                        <div class="cat-card-tag">Automation & OEM</div>
+                        <h3 class="cat-card-name">Edge Series</h3>
+                        <div class="cat-card-range">-40°C to 1100°C</div>
+                        <p class="cat-card-desc">Automation and OEM integration. Compact, miniature, and high-performance models. PLC / SCADA / DCS ready. No cooling required below 180°C ambient.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">PLC / SCADA Ready</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 2. A Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="fixed">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="A-Series-3.webp" alt="A Series">
+                        </div>
+                        <div class="cat-card-tag">Fixed Online</div>
+                        <h3 class="cat-card-name">A Series</h3>
+                        <div class="cat-card-range">50°C to 3000°C</div>
+                        <p class="cat-card-desc">Rugged. Fixed optics. The widest temperature range in the lineup. Workhorse for steel, cement, and continuous high-temperature processes.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">Rugged Workhorse</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 3. A+ Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="fixed">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="A+ series.webp" alt="A+ Series">
+                        </div>
+                        <div class="cat-card-tag">Fixed Online — Precision</div>
+                        <h3 class="cat-card-name">A+ Series</h3>
+                        <div class="cat-card-range">210°C to 3000°C</div>
+                        <p class="cat-card-desc">Focusable optics with inbuilt display and parameterising key. When mounting distance varies or you need precise control over spot size.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">Focusable Optics</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 4. Fiber Optic Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="specialty">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="Fiber optic series.png" alt="Fiber Optic Series">
+                        </div>
+                        <div class="cat-card-tag">Special Pyrometers</div>
+                        <h3 class="cat-card-name">Fiber Optic Series</h3>
+                        <div class="cat-card-range">250°C to 3200°C</div>
+                        <p class="cat-card-desc">For where electronics can't survive — but a fiber can. High EMI environments, vacuum chambers, and clean rooms.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">High EMI / Vacuum</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 5. AL Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="specialty">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="AL series.webp" alt="AL Series">
+                        </div>
+                        <div class="cat-card-tag">Special Pyrometers</div>
+                        <h3 class="cat-card-name">AL Series</h3>
+                        <div class="cat-card-range">-20°C to 3200°C</div>
+                        <p class="cat-card-desc">Thermopile sensors in short and long spectral ranges. For applications where standard wideband ranges aren't precise enough.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">Thermopile Sensors</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 6. E Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="fixed">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="E-Series-1.webp" alt="E Series">
+                        </div>
+                        <div class="cat-card-tag">Fixed Online</div>
+                        <h3 class="cat-card-name">E Series</h3>
+                        <div class="cat-card-range">0°C to 2500°C</div>
+                        <p class="cat-card-desc">Separate sensor head. For confined spaces where the main body can't survive near the heat. LED display, parameterising key.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">Separate Sensor Head</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 7. T Series -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="fixed">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="T series.png" alt="T Series">
+                        </div>
+                        <div class="cat-card-tag">Fixed Online — OEM</div>
+                        <h3 class="cat-card-name">T Series</h3>
+                        <div class="cat-card-range">-20°C to 2500°C</div>
+                        <p class="cat-card-desc">Two-wire OEM design. Built to disappear into your machine. Signal output integrates directly into your control loop.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">2-Wire Control Loop</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 8. Glass Pyrometer -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="specialty">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="Glass pyrometer.png" alt="Glass Pyrometer">
+                        </div>
+                        <div class="cat-card-tag">Special Pyrometers</div>
+                        <h3 class="cat-card-name">Glass Pyrometer</h3>
+                        <div class="cat-card-range">250°C to 2500°C</div>
+                        <p class="cat-card-desc">Purpose-built for glass furnace, fore hearth, feeder, and working end. 5.14 µm wavelength. Not interchangeable with standard series.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">5.14 µm Glass Wavelength</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 9. Portable Pyrometer -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="portable">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="Portable-Series.webp" alt="Portable Pyrometer">
+                        </div>
+                        <div class="cat-card-tag">Portable Series</div>
+                        <h3 class="cat-card-name">Portable Pyrometer</h3>
+                        <div class="cat-card-range">0°C to 3000°C</div>
+                        <p class="cat-card-desc">Battery operated. Through-lens optical sighting. Up to 40,000 readings stored. Foundries, maintenance rounds, and commissioning up to 3,000°C.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">Through-Lens Sighting</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 10. Special Pyrometer -->
+                <a href="https://tempsens.com" target="_blank" class="cat-card" data-cat="specialty">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="Special Pyrometer.webp" alt="Special Pyrometer">
+                        </div>
+                        <div class="cat-card-tag">Special Pyrometers</div>
+                        <h3 class="cat-card-name">Special Pyrometer</h3>
+                        <div class="cat-card-range">350°C to 2000°C</div>
+                        <p class="cat-card-desc">Sulphur recovery units, metal pouring streams, Pt-Rh thermocouple replacement. For the applications standard series weren't designed for.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">SRU & Custom Applications</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+                <!-- 11. Aluminium Pyrometers -->
+                <a href="https://tempsens.com/product/a5-s-in-highly-accurate-ir-non-contact-pyrometer-with-built-in-scanning-system/" target="_blank" class="cat-card" data-cat="specialty">
+                    <div>
+                        <div class="cat-card-img">
+                            <img src="Aluminium pyrometer.png" alt="Aluminium Pyrometers">
+                        </div>
+                        <div class="cat-card-tag">Special Pyrometers</div>
+                        <h3 class="cat-card-name">Aluminium Pyrometers</h3>
+                        <div class="cat-card-range">105°C to 2500°C</div>
+                        <p class="cat-card-desc">Built for aluminium's low, variable emissivity. Built-in compensation where standard pyrometers give readings that can't be trusted.</p>
+                    </div>
+                    <div class="cat-card-footer">
+                        <span class="cat-card-spec-tag">Emissivity Compensation</span>
+                        <span class="cat-card-arrow">VIEW PRODUCT →</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============ SCROLL 7 — TECHNICAL DEPTH & SEO CONTENT ============ -->
+    <section class="technical-section" id="technical">
+        <div class="tech-container">
+            <div class="tech-header">
+                <div class="tech-eyebrow">SCROLL 06 — TECHNICAL ARCHITECTURE</div>
+                <h2 class="tech-title">WANT THE FULL TECHNICAL PICTURE?</h2>
+                <p class="tech-desc">Explore technical specifications, optical principles, emissivity physics, environmental installation guidance, and integration standards.</p>
+            </div>
+
+            <div class="accordion-list">
+                
+                <!-- Block 1: How Pyrometer works? -->
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="accordion-title"><span class="accordion-num">01</span> How Pyrometer works? & Spectral Range</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>A pyrometer is a thermal sensing tool that consists of a wide range of devices in order to read the temperature of an object without direct contact. The pyrometer’s optical system is able to capture the electromagnetic radiation emitted by the object. Once passed through the optical system, the infrared rays reach a transducer, which then converts the rays into a small electrical signal.</p>
+                            <p>The pyrometer equipment also includes electronic components capable of amplifying the signal, filtering out unwanted noise, linearizing it and correcting the signal depending on some parameters. The final measurement may then be displayed on a computer screen, panel, or recorded with the help of a datalogger.</p>
+                            
+                            <h4 style="font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin: 20px 0 10px;">Spectral range & why it matters</h4>
+                            <p>The spectral range of a pyrometer is defined as the range of infrared wavelengths used to determine the temperature, usually expressed in micrometres (µm), such as 0.8–1.1 µm, 1.6 µm, 3–5 µm, or 8–14 µm. The importance of spectral range is because different materials emit infrared radiation in a different manner at different wavelengths.</p>
+                            <p>The right spectral range helps to achieve better measurement accuracy and decreases errors introduced by emissivity, flames, smoke, gases, glass, or different materials that may be located between the pyrometer and the object. Short wavelengths of a pyrometer are suitable for high-temperature metals while longer wavelengths may be used for cold objects and non-metallic surfaces. Thus, a proper spectral range ensures accurate temperature measurements.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 2: Emissivity -->
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="accordion-title"><span class="accordion-num">02</span> Emissivity & Surface Physics</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Emissivity plays an important role in making the temperature measurement accurate by means of a pyrometer. Emissivity refers to the capability of a surface to emit IR radiation compared to an ideal blackbody, with values ranging from 0 to 1. Different materials, surface treatments, oxidation states, and temperatures can give rise to various emissivity values. An incorrect emissivity setting can lead to considerable errors in measurement, especially for shiny or reflecting metals. It is important to set the pyrometer according to the type of material in question, the surface condition, and the working temperature, while checking the emissivity value every time the processing conditions change.</p>
+                            
+                            <ul style="margin-top: 14px; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                                <li><strong>Oxidised surfaces</strong> → generally have higher and more stable emissivity, making them easier to measure accurately.</li>
+                                <li><strong>Polished metals</strong> → have low emissivity and are highly sensitive to surface condition and reflections; short-wavelength, two-colour measurement, or careful emissivity calibration may be required.</li>
+                                <li><strong>Glass</strong> → around 5.0–5.14 µm is commonly preferred for high-temperature glass surface measurement. 8–14 µm can also measure the surface of glass at lower temperatures; it does not normally measure through ordinary glass.</li>
+                                <li><strong>Plastics and rubber</strong> → 8–14 µm works well for many opaque plastics and rubber because they generally have high emissivity. Thin or semi-transparent plastic films may require a different spectral range.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 3: Getting the installation right -->
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="accordion-title"><span class="accordion-num">03</span> Getting the Installation Right</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>The pyrometer is often the easy part. The installation determines whether you get a useful reading. Common mistakes: mounting too close to the target (small field of view misses the target), no air purge in dusty environments (window fouls, reading drifts), incorrect sighting tube length (reads the tube wall temperature, not the target).</p>
+                            <p style="margin-top: 10px;">All accessories are available from us alongside the pyrometer. Specifying the right accessory kit at the time of purchase is cheaper than a site visit six months later.</p>
+                            
+                            <ul style="margin-top: 14px; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                                <li><strong>Air purge collar</strong> — mandatory in cement, steel, and any high-dust environment</li>
+                                <li><strong>Water cooling jacket</strong> — for ambient temperatures above 60–70°C around the pyrometer body</li>
+                                <li><strong>Sighting tube</strong> — for furnace mounting, aligns the FOV and protects the lens window</li>
+                                <li><strong>Mounting bracket</strong> — adjustable for initial alignment, lockable once set</li>
+                                <li><strong>USB converter / RS485 adaptor</strong> — for configuration and data logging</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 4: Frequently asked questions -->
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span class="accordion-title"><span class="accordion-num">04</span> Frequently Asked Questions</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="faq-item-group">
+
+                                <div class="faq-q-item">
+                                    <button class="faq-q-btn" onclick="toggleFAQ(this)">
+                                        <span>How accurate are the portable pyrometers?</span>
+                                        <span class="faq-q-icon">+</span>
+                                    </button>
+                                    <div class="faq-ans-content">
+                                        <div class="faq-ans-body">
+                                            ±0.3% to ±1.5% of measured value, with 5ms to 1s response times depending on model. For commissioning and spot checks, this is entirely adequate. For continuous process control, a fixed-mount unit is more appropriate.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-q-item">
+                                    <button class="faq-q-btn" onclick="toggleFAQ(this)">
+                                        <span>Can Edge Series integrate with PLC / SCADA / DCS?</span>
+                                        <span class="faq-q-icon">+</span>
+                                    </button>
+                                    <div class="faq-ans-content">
+                                        <div class="faq-ans-body">
+                                            Yes. Edge Series supports 0–10V, 0–5V, 4–20mA, TTL, USB, and RS485. All standard industrial control interfaces. Full compatibility with factory automation systems.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="faq-q-item">
+                                    <button class="faq-q-btn" onclick="toggleFAQ(this)">
+                                        <span>What's the difference between A Series and A+ Series?</span>
+                                        <span class="faq-q-icon">+</span>
+                                    </button>
+                                    <div class="faq-ans-content">
+                                        <div class="faq-ans-body">
+                                            The A+ has focusable optics which means you can adjust the measurement spot size for different distances with an inbuilt display and parameterising key. The A Series has fixed optics, which is perfectly adequate for most fixed-mount installations. The A+ is worth the extra cost when the mounting distance varies or precise spot size control matters.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand-title">Tempsens</div>
+                <p class="footer-brand-desc">India's leading temperature sensing & non-contact Pyrometry manufacturer. Delivering industrial precision across steel, aluminium, glass, cement, and power processes worldwide since 1976.</p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Pyrometers</h5>
+                <ul>
+                    <li><a href="#catalogue">A5-S-IN Aluminium</a></li>
+                    <li><a href="#catalogue">EDGE C8 Ratio</a></li>
+                    <li><a href="#catalogue">E450C PL Fiber Optic</a></li>
+                    <li><a href="#catalogue">Glass Pyrowell G2</a></li>
+                    <li><a href="#catalogue">A-Series Online</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Applications</h5>
+                <ul>
+                    <li><a href="#industries">Aluminium Extrusion</a></li>
+                    <li><a href="#industries">Steel & Melt Shop</a></li>
+                    <li><a href="#industries">Glass Forehearth</a></li>
+                    <li><a href="#industries">Cement Kiln Shell</a></li>
+                    <li><a href="#industries">Thermal Power</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="https://tempsens.com/about">About Tempsens</a></li>
+                    <li><a href="https://tempsens.com/contact">Contact Support</a></li>
+                    <li><a href="https://tempsens.com">Certifications</a></li>
+                    <li><a href="https://tempsens.com">Calibration Labs</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Tempsens Instruments Pvt. Ltd. All rights reserved.</span>
+            <span>ISO 9001:2015 | NABL Accredited Calibration (-20°C to 3000°C)</span>
+        </div>
+    </footer>
+
+
+    <!-- ============ JAVASCRIPT ANIMATION SYSTEM ============ -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Master Timeline for 6 Pinned Chapters
+        const pinTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#pin-master",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.2,
+                pin: "#stage-container",
+                anticipatePin: 1
+            }
+        });
+
+        // 1. HERO TITLE & MARQUEE LOOP ANIMATION
+        pinTimeline
+            .to("#hero-title-wrap", {
+                scale: 1.5,
+                opacity: 0,
+                display: "none",
+                duration: 1,
+                ease: "power2.inOut"
+            }, 0)
+            .to("#hero-product-marquee", {
+                opacity: 0,
+                display: "none",
+                scale: 0.85,
+                duration: 0.8,
+                ease: "power2.inOut"
+            }, 0)
+            .to("#hero-bottom-actions", {
+                opacity: 0,
+                display: "none",
+                pointerEvents: "none",
+                duration: 0.4,
+                ease: "power2.inOut"
+            }, 0)
+            .to("#scroll-hint", {
+                opacity: 0,
+                display: "none",
+                duration: 0.3
+            }, 0)
+
+            // Skip SCROLL 1 (removed) -> Go directly to SCROLL 2 Quick Selector
+            .to("#chapter-2-measure", {
+                opacity: 1,
+                display: "flex",
+                pointerEvents: "auto",
+                zIndex: 100,
+                duration: 0.6
+            }, 0.8)
+            .to("#chapter-3-industry", {
+                display: "none",
+                pointerEvents: "none",
+                zIndex: 1
+            }, 0.8)
+
+            // Fade out SCROLL 2 -> Reveal SCROLL 3 Industry Selector
+            .to("#chapter-2-measure", {
+                opacity: 0,
+                display: "none",
+                pointerEvents: "none",
+                zIndex: 1,
+                duration: 0.4
+            }, 2.2)
+            .to("#chapter-3-industry", {
+                opacity: 1,
+                display: "flex",
+                pointerEvents: "auto",
+                zIndex: 100,
+                duration: 0.6
+            }, 2.4)
+
+            // Fade out SCROLL 3 -> Reveal SCROLL 4 Primary CTA
+            .to("#chapter-3-industry", {
+                opacity: 0,
+                display: "none",
+                pointerEvents: "none",
+                zIndex: 1,
+                duration: 0.4
+            }, 3.8)
+            .to("#chapter-4-cta", {
+                opacity: 1,
+                display: "flex",
+                pointerEvents: "auto",
+                zIndex: 100,
+                duration: 0.6
+            }, 4.0);
+
+
+        // ======== SCROLL 2 HORIZONTAL TILE SELECTOR ========
+        const tileData = {
+            moving: {
+                header: "Recommendation for Moving targets:",
+                desc: "For moving targets, the A Series or E Series in fixed-mount configuration. Response from 2 ms. The sensor reads before the target passes. Portable P Series for spot checks on moving stock."
+            },
+            extreme: {
+                header: "Recommendation for Extreme temperature:",
+                desc: "Above 1,300°C, you're in noble metal territory for contact sensors. A pyrometer is often the only practical solution. A Series covers to 3,200°C. P450 portable covers to 3,000°C. Both use short-wave bands where emissivity variation matters less at extreme temperatures."
+            },
+            nocontact: {
+                header: "Recommendation for Can't make contact:",
+                desc: "Contact is off the table — so the question becomes which spectral range. Pharma and food processes typically sit below 300°C: Edge Series. Semiconductor and vacuum environments: Fiber Optic Series. General industrial non-contact: A or E Series depending on mounting space."
+            },
+            glass: {
+                header: "Recommendation for Glass or aluminium:",
+                desc: "Glass and aluminium cannot be measured with a standard pyrometer. Glass requires 5.14 µm — a standard sensor reads through it. Aluminium has emissivity between 0.05–0.35 depending on surface condition — it needs built-in compensation. Glass Pyrometer and Aluminium Series respectively. Not interchangeable."
+            },
+            oem: {
+                header: "Recommendation for OEM integration:",
+                desc: "T Series: two-wire, compact, designed to disappear into your machine's control loop. Edge Micro for environments below 120°C ambient. Both support analog and digital outputs compatible with all standard PLC, SCADA, and DCS systems."
+            },
+            spot: {
+                header: "Recommendation for Spot checks and commissioning:",
+                desc: "Portable P Series. Through-lens optical sighting so you're certain the reading is on the right spot. Up to 40,000 readings logged. P250 for most applications. P450 for extreme temperatures to 3,000°C. P250C and P450C when emissivity is unknown or variable."
+            }
+        };
+
+        function selectTile(key, tileEl) {
+            document.querySelectorAll('.selector-tile').forEach(t => t.classList.remove('active'));
+            if (tileEl) tileEl.classList.add('active');
+
+            const data = tileData[key];
+            if (!data) return;
+
+            const box = document.getElementById('selector-detail-box');
+            if (!box) return;
+
+            gsap.to(box, {
+                opacity: 0,
+                y: 6,
+                duration: 0.12,
+                onComplete: () => {
+                    const labelEl = document.getElementById('detail-header-label');
+                    const descEl = document.getElementById('detail-description');
+                    if (labelEl) labelEl.innerText = data.header;
+                    if (descEl) descEl.innerText = data.desc;
+                    gsap.to(box, { opacity: 1, y: 0, duration: 0.2 });
+                }
+            });
+        }
+
+        // Attach click listeners to all selector tiles
+        document.querySelectorAll('.selector-tile').forEach(tile => {
+            tile.addEventListener('click', function(e) {
+                const key = this.getAttribute('data-key');
+                if (key) selectTile(key, this);
+            });
+        });
+
+
+        // ======== SCROLL 4 THIN RING STRIP & INDUSTRY TRANSFORMATION ========
+        const ringData = {
+            steel: {
+                measuring: "Billet surface at the rolling mill exit. Ladle shell temperature. Reheating furnace interior. Continuous caster tundish. TMT quench zone exit temperature.",
+                whyFails: "You can't place a contact sensor on steel moving at line speed. Ladle shells exceed sensor survival temperature. Furnace interiors need readings without disturbing the atmosphere.",
+                challenge: "Scale and steam between the pyrometer and the billet distort the reading. Emissivity varies as the surface oxidises through the rolling process. Ladle shells need to be scanned continuously — one cold spot means refractory failure and a furnace shutdown.",
+                recommended: "A Series or E Series for fixed mount. Portable P Series for spot-checking."
+            },
+            glass: {
+                measuring: "Furnace crown and sidewall temperature. Fore hearth and feeder zone. Forming section. Annealing lehr exit temperature.",
+                whyFails: "Furnace temperatures exceed contact sensor survival limits. The forming and lehr sections need continuous non-intrusive monitoring that doesn't disrupt glass flow.",
+                challenge: "Standard pyrometers read through glass at most wavelengths — the glass is transparent to their spectral band. You're measuring the furnace atmosphere, not the glass surface. This is not a calibration problem. It's a fundamental spectral mismatch.",
+                recommended: "Glass Pyrometer"
+            },
+            cement: {
+                measuring: "Rotary kiln shell temperature across its full length. Kiln inlet and outlet zone temperatures. Clinker cooler exit temperature.",
+                whyFails: "The kiln rotates continuously. There is no practical location for a contact sensor on a rotating shell. Shell scanning requires measurement across the entire shell length to detect hot spots before they indicate refractory failure.",
+                challenge: "Clinker and kiln dust coat the shell and change emissivity continuously. Hot spots can develop over hours. A single fixed-point sensor misses them. The pyrometer has to track the whole shell or be scanned across it systematically.",
+                recommended: "A Series fixed mount for spot measurement."
+            },
+            pharma: {
+                measuring: "Tablet coating pan temperature during film application. Lyophiliser shelf and product temperatures. Blister packaging sealing zone. Sterilisation tunnel conveyor product temperature.",
+                whyFails: "Contact means contamination risk. Pharmaceutical processes operate under strict contamination controls — any sensor that touches the product or product contact surfaces requires validation and cleaning protocols that slow production and introduce risk.",
+                challenge: "Pharmaceutical processes typically run at 50°C–300°C — the low end of most pyrometer ranges where emissivity matters more, not less. Steam from sterilisation processes interferes with many spectral ranges. Documentation for process validation requires calibration-traceable measurements.",
+                recommended: "Edge Series or AL Series for low-temperature pharma environments."
+            },
+            semiconductor: {
+                measuring: "Silicon wafer surface temperature during rapid thermal annealing. CVD chamber process temperature. Epitaxial growth substrate temperature. Etch process endpoint temperature.",
+                whyFails: "Any contact contaminates the wafer. Processes run in vacuum or controlled atmospheres at pressures where contact sensing is mechanically impractical. Clean room protocols prohibit particulate-generating contact sensors.",
+                challenge: "Silicon is infrared-transparent below approximately 600°C — a standard pyrometer measures the chuck or susceptor behind the wafer, not the wafer itself. Measurement through vacuum chamber windows requires matching the spectral range to the window material's transmission characteristics.",
+                recommended: "Fiber Optic Series or Edge Series for clean room integration."
+            },
+            petrochemical: {
+                measuring: "Fired heater tube surface temperature. Sulphur recovery unit reaction furnace temperature. Reformer tube skin temperature. Fluid catalytic cracker regenerator temperature.",
+                whyFails: "Fired heater tubes operate in hazardous, high-radiation environments. Tube skin thermocouples have limited life at operating temperatures and require shutdown to replace. Sulphur recovery unit temperatures require measurement through a column of hot combustion gas.",
+                challenge: "Combustion gas — CO₂ and water vapour — absorbs infrared radiation at most wavelengths. A standard pyrometer reading through combustion gas measures the gas, not the surface behind it. You need a spectral range where combustion gas is transparent.",
+                recommended: "SRU FO Pyrometer (Special series), Portable Series"
+            },
+            power: {
+                measuring: "Boiler tube surface temperature. Turbine blade tip temperature. Steam pipe surface during commissioning. Coal mill outlet temperature.",
+                whyFails: "Boiler tube contact sensors require shutdown to install or replace. Turbine blade tips rotate at speed — contact measurement is mechanically impossible. Steam pipe surface monitoring needs continuous, maintenance-free operation during long runs between outages.",
+                challenge: "Boiler tube hot spots indicate scale buildup or flow restriction — missing them leads to tube failure. Turbine blade temperature measurement requires fast response to track temperature variation across each blade. Steam interference between the pyrometer and the tube surface requires careful spectral selection.",
+                recommended: "A Series fixed-mount for boiler tube monitoring. E Series for confined turbine casing locations."
+            }
+        };
+
+        function selectRingIndustry(key, btn) {
+            document.querySelectorAll('.ind-pill-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const data = ringData[key];
+            const card = document.getElementById('ind-detail-card');
+
+            gsap.to(card, {
+                opacity: 0,
+                y: 8,
+                duration: 0.15,
+                onComplete: () => {
+                    document.getElementById('ind-measuring').innerText = data.measuring;
+                    document.getElementById('ind-why-fails').innerText = data.whyFails;
+                    document.getElementById('ind-challenge').innerText = data.challenge;
+                    document.getElementById('ind-recommended').innerText = data.recommended;
+
+                    gsap.to(card, { opacity: 1, y: 0, duration: 0.25 });
+                }
+            });
+        }
+
+
+        // ======== SCROLL 5 CATALOGUE FILTER ========
+        function filterCatalogue(category, btn) {
+            document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.cat-card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-cat');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'flex';
+                    gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.3 });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+
+        // ======== SCROLL 6 MAIN ACCORDION TOGGLE ========
+        function toggleAccordion(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('open');
+                el.querySelector('.accordion-content').style.maxHeight = null;
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                const content = item.querySelector('.accordion-content');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // ======== SCROLL 6 FAQ ACCORDION TOGGLE ========
+        function toggleFAQ(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            if (isOpen) {
+                item.classList.remove('open');
+                item.querySelector('.faq-ans-content').style.maxHeight = null;
+            } else {
+                item.classList.add('open');
+                const content = item.querySelector('.faq-ans-content');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+    </script>
+</body>
+</html>
